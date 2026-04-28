@@ -26,8 +26,6 @@
             z-index: 100;
         }
 
-        .lace-top { position: fixed; top: 0; left: 0; transform: rotate(180deg); }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
@@ -38,7 +36,6 @@
             overflow-x: hidden;
         }
 
-        /* --- Background Particles --- */
         #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .particle { position: absolute; bottom: -20px; animation: floatUp var(--duration) linear infinite; opacity: 0.6; color: var(--barbie-pink); }
         @keyframes floatUp {
@@ -47,7 +44,6 @@
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Intro Overlay --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--barbie-pink);
@@ -83,10 +79,8 @@
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* --- Main Content --- */
         .main-content { opacity: 0; transition: opacity 1.5s ease; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
 
-        /* --- HERO MARQUEE BANNER --- */
         .hero-banner {
             width: 100%; height: 60vh; background: #fff; position: relative; overflow: hidden;
             border-bottom: 6px solid var(--barbie-pink);
@@ -144,10 +138,9 @@
         .btn-love { background: var(--text-color); }
         .btn-love:hover { background: var(--barbie-pink); }
 
-        /* --- Press Me Prompts --- */
         .prompt {
             position: absolute; 
-            top: 60px; /* Moved below buttons to stop blocking text above */
+            top: 60px;
             background: var(--barbie-pink);
             color: white; padding: 4px 10px; border-radius: 10px;
             font-size: 0.65rem; font-weight: bold; animation: bounce 1.5s infinite;
@@ -155,34 +148,78 @@
             z-index: 100;
         }
         .prompt::after {
-            content: ''; position: absolute; top: -8px; left: 50%; /* Arrow points UP now */
+            content: ''; position: absolute; top: -8px; left: 50%;
             transform: translateX(-50%); border-width: 5px; border-style: solid;
             border-color: transparent transparent var(--barbie-pink) transparent;
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
-        /* --- Garden Section --- */
         .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
         .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; border-right: 1px solid var(--lace-pink); }
         
+        /* --- Version 2.6: Girly Card Enhancements --- */
+        .marin-card-container {
+            width: 100%; position: relative; padding: 15px;
+            background: white; border-radius: 15px;
+            border: 2px solid var(--barbie-pink);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: cardFloat 5s ease-in-out infinite; /* Floating card animation */
+            transform-origin: center;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        .marin-card-inner {
+            border: 2px solid var(--lace-pink);
+            border-radius: 10px;
+            overflow: hidden;
+            display: block;
+            position: relative;
+        }
+
+        /* Shimmer effect for the card image */
+        .marin-card-inner::after {
+            content: '';
+            position: absolute; top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            30%, 100% { left: 150%; }
+        }
+
         .marin-full-img { 
-            width: 100%; border-radius: 15px 15px 0 0; 
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            width: 100%; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
             display: block;
         }
 
-        /* --- Flowery Solid line for Marin 4 --- */
-        .flower-frame {
-            width: 100%;
-            height: 20px;
-            background-color: var(--barbie-pink);
-            background-image: radial-gradient(circle at 10px 10px, white 2px, transparent 0),
-                              radial-gradient(circle at 10px 10px, white 2px, transparent 0);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            border-radius: 0 0 15px 15px;
-            margin-top: -2px; /* Pull up to touch image */
-            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.2);
+        .card-tape {
+            position: absolute; top: -10px; right: 10px; width: 90px; height: 30px;
+            background: rgba(255, 127, 161, 0.4); transform: rotate(5deg);
+            z-index: 2; border: 1px dashed rgba(255, 255, 255, 0.6);
+        }
+
+        /* Wiggling animated title */
+        .card-title {
+            text-align: center; margin-top: 15px; 
+            color: var(--barbie-pink);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
+            animation: wiggle 2s ease-in-out infinite;
+            display: inline-block; width: 100%;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(-1deg); }
         }
 
         .page-footer {
@@ -192,7 +229,6 @@
             background-color: white;
         }
 
-        /* --- Floating Marin & Bubbly Reaction --- */
         .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
         .speech-bubble {
             position: absolute; top: 5%; left: -10%;
@@ -220,13 +256,11 @@
             .content-section { padding: 25px; }
             .marin-float { width: 140px; }
             .speech-bubble { left: -70%; top: -15%; width: 130px; }
-            .prompt { top: 55px; } /* Mobile tweak for prompts */
+            .prompt { top: 55px; }
         }
     </style>
 </head>
 <body>
-    <div class="lace-trim lace-top"></div>
-
     <div id="particles-container"></div>
 
     <div class="music-toggle" id="musicToggle">
@@ -288,9 +322,12 @@
                 I wanted to fill this space with things as beautiful as you. 🌺
             </div>
 
-            <div style="width: 100%; display: flex; flex-direction: column;">
-                <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
-                <div class="flower-frame"></div>
+            <div class="marin-card-container">
+                <div class="card-tape"></div>
+                <div class="marin-card-inner">
+                    <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
+                </div>
+                <div class="card-title">you're a cutieee!!!</div>
             </div>
         </div>
 
