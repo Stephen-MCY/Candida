@@ -6,55 +6,49 @@
     <title>For My Favorite Person</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #ffeef2;
+            margin: 0; padding: 0; display: flex; justify-content: center;
+            align-items: center; height: 100vh; background: #ffeef2;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            text-align: center;
+            overflow: hidden; text-align: center;
         }
 
         .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            z-index: 10;
-            max-width: 400px;
+            background: white; padding: 2rem; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 10;
+            max-width: 400px; position: relative;
         }
 
         h1 { color: #ff4d6d; }
         p { color: #555; line-height: 1.6; }
 
         .btn {
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.2s;
-            margin: 10px;
+            background: #ff4d6d; color: white; border: none;
+            padding: 10px 20px; border-radius: 50px; cursor: pointer;
+            font-size: 1rem; transition: transform 0.2s; margin: 10px;
         }
 
         .btn:hover { transform: scale(1.1); }
 
-        #no-btn {
-            position: absolute;
-            background: #aaa;
+        #no-btn { position: absolute; background: #aaa; }
+
+        /* Marin Kitagawa Styling */
+        .marin-container {
+            position: fixed; bottom: -10px; right: 20px;
+            width: 200px; z-index: 100; transition: transform 0.5s;
+        }
+
+        .marin-img { width: 100%; filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2)); }
+
+        .speech-bubble {
+            position: absolute; top: -60px; left: -40px;
+            background: white; padding: 10px; border-radius: 15px;
+            border: 2px solid #ff4d6d; font-size: 0.8rem; font-weight: bold;
+            display: none; width: 120px; box-shadow: 5px 5px 0px #ff4d6d;
         }
 
         .heart {
-            position: absolute;
-            color: #ff4d6d;
-            font-size: 20px;
-            user-select: none;
-            animation: float 4s linear infinite;
+            position: absolute; color: #ff4d6d; font-size: 20px;
+            user-select: none; animation: float 4s linear infinite;
         }
 
         @keyframes float {
@@ -69,11 +63,16 @@
         <h1>Hi Beautiful! ❤️</h1>
         <p id="message">I made this little space just to tell you how much you mean to me.</p>
         <button class="btn" onclick="revealReason()">Click for a reason I love you</button>
-        <div id="extra-content" style="margin-top: 20px; font-weight: bold; color: #ff4d6d;"></div>
+        <div id="extra-content" style="margin-top: 20px; font-weight: bold; color: #ff4d6d; height: 40px;"></div>
         
         <p style="margin-top: 30px;">Do you love me too?</p>
         <button class="btn" onclick="sayYes()">Yes!</button>
         <button class="btn" id="no-btn" onmouseover="moveButton()">No</button>
+    </div>
+
+    <div class="marin-container">
+        <div id="bubble" class="speech-bubble">Gosh, that's so sweet! ✨</div>
+        <img src="https://i.ibb.co/L5MvL0n/marin-kitagawa.png" class="marin-img" alt="Marin">
     </div>
 
     <script>
@@ -83,13 +82,29 @@
             "I love the way you laugh at my silly jokes.",
             "You are my safest place and my biggest adventure."
         ];
+        
+        const marinQuotes = [
+            "Gosh, so sweet! ✨",
+            "Aww, look at that!",
+            "Waaa! So romantic!",
+            "You two are goals! ❤️"
+        ];
+
         let reasonIndex = 0;
 
         function revealReason() {
             const display = document.getElementById('extra-content');
+            const bubble = document.getElementById('bubble');
+            
             display.innerText = reasons[reasonIndex];
+            bubble.innerText = marinQuotes[reasonIndex % marinQuotes.length];
+            bubble.style.display = 'block';
+            
             reasonIndex = (reasonIndex + 1) % reasons.length;
             createHeart();
+            
+            // Hide bubble after 3 seconds
+            setTimeout(() => { bubble.style.display = 'none'; }, 3000);
         }
 
         function moveButton() {
@@ -101,8 +116,10 @@
         }
 
         function sayYes() {
-            document.getElementById('main-card').innerHTML = "<h1>I knew it! ❤️</h1><p>You're stuck with me forever now. I love you more than words can say!</p>";
-            for(let i=0; i<20; i++) setTimeout(createHeart, i * 100);
+            document.getElementById('main-card').innerHTML = "<h1>I knew it! ❤️</h1><p>You're stuck with me forever now. Marin and I both think you're the best!</p>";
+            document.getElementById('bubble').innerText = "YAY! IT'S OFFICIAL!";
+            document.getElementById('bubble').style.display = 'block';
+            for(let i=0; i<30; i++) setTimeout(createHeart, i * 100);
         }
 
         function createHeart() {
