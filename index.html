@@ -44,12 +44,15 @@
         .silhouette { width: 180px; filter: brightness(0) invert(1); opacity: 0.3; animation: pulse 3s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         
+        /* Anime Style Logo */
         .intro-logo {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 7vw, 3rem); 
-            font-weight: 900; letter-spacing: 5px;
-            border-top: 2px solid white; border-bottom: 2px solid white;
-            padding: 10px 0; margin-top: 15px;
+            font-size: clamp(2rem, 10vw, 4rem); 
+            font-weight: 900; line-height: 1;
+            text-transform: uppercase;
+            border-bottom: 8px solid white;
+            padding-bottom: 5px; margin-top: 10px;
+            font-style: italic;
         }
 
         /* --- Main Content --- */
@@ -75,9 +78,22 @@
 
         .content-section {
             width: 90%; max-width: 600px;
-            margin: -50px auto 50px; padding: 35px;
+            margin: -50px auto 30px; padding: 35px;
             background: white; z-index: 10; position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* Peony Decorations */
+        .peony-decor {
+            width: 100%; max-width: 600px; padding: 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 40px;
+            margin-bottom: 100px;
+        }
+        .peony-card {
+            background: white; width: 100%; padding: 20px;
+            border-radius: 10px; border-left: 5px solid var(--accent-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-style: italic; color: var(--text-color);
         }
 
         .washi-tape { position: absolute; top: -15px; left: 15%; width: 120px; height: 35px; background: rgba(255, 0, 127, 0.3); transform: rotate(-3deg); }
@@ -88,28 +104,24 @@
         .btn { background: var(--text-color); color: white; border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; }
         .btn:hover { background: var(--barbie-pink); }
 
-        /* --- Music Player Bar --- */
-        .music-player {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: white;
-            padding: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 1000; border-top: 4px solid var(--barbie-pink);
-            display: flex; flex-direction: column; gap: 10px;
+        /* --- Minimal Music Player --- */
+        .music-player-mini {
+            position: fixed; top: 20px; right: 20px;
+            z-index: 3000; display: none;
+        }
+        .play-pause-circle {
+            background: var(--barbie-pink); color: white; border: none;
+            width: 45px; height: 45px; border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer;
+            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
         }
 
-        .player-controls { display: flex; align-items: center; gap: 15px; }
-        .play-pause-btn { background: var(--barbie-pink); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        
-        .seek-bar { flex-grow: 1; cursor: pointer; accent-color: var(--barbie-pink); }
-        .time-display { font-size: 0.7rem; color: #888; width: 35px; }
-
-        .polaroid img { width: 100%; height: 150px; object-fit: cover; background: #eee; }
-        .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; }
+        .marin-float { position: fixed; bottom: -10px; right: -10px; width: 200px; z-index: 100; pointer-events: none; opacity: 0.8; }
 
         @media (max-width: 768px) {
             .hero-banner { height: 40vh; }
             .content-section { margin-top: -30px; }
-            .marin-float { width: 150px; opacity: 0.5; }
+            .marin-float { width: 130px; }
         }
     </style>
 </head>
@@ -117,24 +129,18 @@
 
     <div id="particles-container"></div>
 
-    <div class="music-player">
-        <div style="font-size: 0.7rem; font-weight: bold; color: var(--barbie-pink); margin-bottom: 2px;">Love You Like a Love Song</div>
-        <div class="player-controls">
-            <audio id="bg-music" loop>
-                <source src="music.mp3" type="audio/mpeg">
-            </audio>
-            <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">▶</button>
-            <span class="time-display" id="currentTime">0:00</span>
-            <input type="range" class="seek-bar" id="seekBar" value="0" step="1">
-            <span class="time-display" id="durationTime">0:00</span>
-        </div>
+    <div class="music-player-mini" id="miniPlayer">
+        <audio id="bg-music" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+        <button class="play-pause-circle" id="playBtn" onclick="togglePlay()">⏸</button>
     </div>
 
     <div id="intro-overlay" onclick="startExperience()">
         <div class="intro-content">
             <img src="marin.png" class="silhouette">
-            <div class="intro-logo">MARIN x BARBIE</div>
-            <p style="letter-spacing: 3px; font-size: 0.65rem; margin-top: 15px;">TAP TO START THE MUSIC</p>
+            <div class="intro-logo">My Bebe Darling</div>
+            <p style="letter-spacing: 3px; font-size: 0.65rem; margin-top: 25px;">TAP TO START</p>
         </div>
     </div>
 
@@ -145,8 +151,7 @@
                 <img src="marin3.png" class="hero-img">
             </div>
             <div class="hero-title">
-                <span class="subtitle">To My Special Someone</span>
-                <h2 style="margin:0; font-family: 'Playfair Display'; color:#ff007f;">My Love Story</h2>
+                <h2 style="margin:0; font-family: 'Playfair Display'; color:#ff007f; letter-spacing: 1px;">To My Special Someone</h2>
             </div>
         </header>
 
@@ -163,6 +168,17 @@
                 <button class="btn" style="background: var(--barbie-pink);" onclick="accepted()">I Love You</button>
             </div>
         </main>
+
+        <div class="peony-decor">
+            <div class="peony-card">
+                "A peony represents a happy life and a happy marriage. Just like how you make my life complete." 🌸
+            </div>
+            <div style="font-size: 3rem;">🌸 ✨ 🌸</div>
+            <div class="peony-card">
+                I wanted to fill this space with things as beautiful as you. 🌺
+            </div>
+            <img src="marin2.png" style="width: 80%; border-radius: 20px; opacity: 0.9;">
+        </div>
     </div>
 
     <div class="marin-float">
@@ -172,9 +188,6 @@
     <script>
         const music = document.getElementById('bg-music');
         const playBtn = document.getElementById('playBtn');
-        const seekBar = document.getElementById('seekBar');
-        const currentLabel = document.getElementById('currentTime');
-        const durationLabel = document.getElementById('durationTime');
 
         function createParticles() {
             const container = document.getElementById('particles-container');
@@ -195,10 +208,10 @@
         function startExperience() {
             document.getElementById('intro-overlay').style.transform = 'translateY(-100%)';
             document.getElementById('main-site').style.opacity = '1';
-            togglePlay();
+            document.getElementById('miniPlayer').style.display = 'block';
+            music.play();
         }
 
-        // Music Controls
         function togglePlay() {
             if (music.paused) {
                 music.play();
@@ -207,26 +220,6 @@
                 music.pause();
                 playBtn.innerText = '▶';
             }
-        }
-
-        music.addEventListener('loadedmetadata', () => {
-            seekBar.max = music.duration;
-            durationLabel.innerText = formatTime(music.duration);
-        });
-
-        music.addEventListener('timeupdate', () => {
-            seekBar.value = music.currentTime;
-            currentLabel.innerText = formatTime(music.currentTime);
-        });
-
-        seekBar.addEventListener('input', () => {
-            music.currentTime = seekBar.value;
-        });
-
-        function formatTime(seconds) {
-            let min = Math.floor(seconds / 60);
-            let sec = Math.floor(seconds % 60);
-            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
         }
 
         const reasons = [
