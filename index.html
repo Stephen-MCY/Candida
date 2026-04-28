@@ -114,16 +114,32 @@
         .btn-love:hover { background: var(--barbie-pink); }
 
         /* --- Garden Section --- */
-        .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
+        .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 0px; }
         .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; }
         
+        .marin-4-container { position: relative; width: 100%; overflow: hidden; }
+        
         .marin-full-img { 
-            width: 100%; border-radius: 15px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
-            -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+            width: 100%; border-radius: 15px 15px 0 0; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
+            display: block;
         }
 
-        .page-footer { width: 100%; text-align: center; padding: 60px 20px 120px 20px; font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--barbie-pink); opacity: 0.8; }
+        /* Flowery Border at bottom of Marin 4 */
+        .floral-border {
+            width: 100%; height: 60px;
+            background-color: var(--barbie-pink);
+            background-image: radial-gradient(circle at 50% 100%, var(--accent-pink) 10%, transparent 10%),
+                              radial-gradient(circle at 20% 100%, var(--bisque-beige) 5%, transparent 5%),
+                              radial-gradient(circle at 80% 100%, var(--bisque-beige) 5%, transparent 5%);
+            background-size: 40px 40px;
+            border-top: 4px solid white;
+            border-bottom: 8px solid var(--accent-pink);
+            display: flex; justify-content: center; align-items: center;
+            color: white; font-size: 1.5rem; letter-spacing: 15px;
+        }
+
+        .page-footer { width: 100%; text-align: center; padding: 40px 20px 120px 20px; font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--barbie-pink); opacity: 0.8; }
 
         /* --- Floating Marin & Bubbly Reaction --- */
         .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
@@ -143,12 +159,10 @@
         .play-pause-btn { background: var(--barbie-pink); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
         @media (max-width: 600px) {
-            .hero-banner { height: 45vh; }
-            /* Shifted everything to the left to ensure Marin3 isn't off-screen */
-            .hero-bg-collage { justify-content: flex-start; padding-left: 0; } 
-            .hero-img { max-width: 48%; height: 95%; margin-right: -5px; }
+            .hero-banner { height: 50vh; }
+            .hero-bg-collage { justify-content: space-around; padding: 0; }
+            .hero-img { max-width: 48%; height: 95%; }
             .hero-title { padding: 8px 12px; font-size: 0.8rem; }
-            
             .content-section { margin-top: -30px; padding: 25px; }
             .marin-float { width: 140px; }
             .speech-bubble { left: -70%; top: -15%; width: 130px; }
@@ -214,7 +228,10 @@
                 I wanted to fill this space with things as beautiful as you. 🌺
             </div>
 
-            <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
+            <div class="marin-4-container">
+                <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
+                <div class="floral-border">🌸🌸🌸</div>
+            </div>
         </div>
 
         <footer class="page-footer">
