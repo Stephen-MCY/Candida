@@ -47,7 +47,7 @@
         .silhouette { 
             width: clamp(200px, 60vw, 350px); 
             filter: brightness(0) invert(1); 
-            opacity: 0.4; /* More noticeable */
+            opacity: 0.4;
             position: absolute;
             z-index: -1;
             animation: pulse 3s infinite ease-in-out;
@@ -131,14 +131,39 @@
 
         /* --- Floating Marin & Bubbly Reaction --- */
         .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
+        
+        /* New Comic-Style Speech Bubble */
         .speech-bubble {
             position: absolute; top: 0%; left: -30%;
-            background: white; border: 2.5px solid var(--barbie-pink);
-            padding: 12px 18px; border-radius: 25px 25px 25px 0;
-            font-weight: 600; color: var(--barbie-pink); display: none;
-            box-shadow: 6px 6px 0px var(--accent-pink); z-index: 101;
+            background: white; border: 3px solid #000; /* Darker, thicker border for comic look */
+            padding: 12px 18px; border-radius: 20px;
+            font-weight: 600; color: var(--text-color); display: none;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1); z-index: 101;
             font-size: 0.8rem; width: 160px; text-align: center;
             animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* The speech bubble pointer */
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; /* Adjust to point at Marin */
+            right: 15%; /* Point originating from the side closer to Marin */
+            border-width: 15px;
+            border-style: solid;
+            border-color: #fff transparent transparent transparent;
+        }
+
+        /* Redraw border for the pointer */
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: calc(15% - 2px);
+            border-width: 17px;
+            border-style: solid;
+            border-color: #000 transparent transparent transparent;
+            z-index: -1;
         }
 
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
@@ -151,6 +176,12 @@
             .marin-float { width: 140px; }
             .speech-bubble { left: -85%; top: -25%; width: 130px; }
             .prompt { font-size: 0.55rem; padding: 3px 7px; top: -35px; }
+
+            /* Better mobile banner alignment */
+            .hero-bg-collage { justify-content: flex-start; gap: 0; padding-left: 5%; }
+            .hero-img { height: 90%; }
+            .hero-img:first-child { transform: scale(0.85) translateX(-10%); }
+            .hero-img:nth-child(2) { transform: scale(0.85) translateX(-20%); opacity: 0.5; } /* Fade the background one slightly */
         }
     </style>
 </head>
@@ -196,10 +227,10 @@
             <div id="reason-display" style="color: var(--barbie-pink); font-weight: 600; margin: 15px 0; min-height: 24px;"></div>
 
             <div class="btn-group">
-                <div class="prompt" style="left: 15%;">Press me! ↓</div>
+                <div class="prompt" id="prompt-next" style="left: 15%;">Press me! ↓</div>
                 <button class="btn btn-next" onclick="nextReason()">Next Reason</button>
                 
-                <div class="prompt" style="right: 15%;">Press me! ↓</div>
+                <div class="prompt" id="prompt-love" style="right: 15%; display: none;">Press me! ↓</div>
                 <button class="btn btn-love" onclick="accepted()">I Love You</button>
             </div>
         </main>
@@ -226,7 +257,10 @@
         const music = document.getElementById('bg-music');
         const playBtn = document.getElementById('playBtn');
         const bubble = document.getElementById('bubble');
+        const promptNext = document.getElementById('prompt-next');
+        const promptLove = document.getElementById('prompt-love');
         let bubbleTimeout;
+        let reasonsCycled = 0; // Track how many reasons have been viewed
 
         function createParticles() {
             const container = document.getElementById('particles-container');
@@ -279,23 +313,29 @@
             document.getElementById('reason-display').innerText = reasons[idx];
             showBubble(marinQuotes[Math.floor(Math.random() * marinQuotes.length)]);
             idx = (idx + 1) % reasons.length;
+            reasonsCycled++; // Increment cycle count
+
+            // Check if all reasons have been viewed (reasons.length is 4)
+            if (reasonsCycled >= reasons.length) {
+                // All reasons viewed, swap the 'Press me' prompts
+                promptNext.style.display = 'none'; // Hide Next Reason prompt
+                promptLove.style.display = 'block'; // Show I Love You prompt
+            }
         }
 
         function showBubble(text) {
-            // Clear existing timeout to reset the 3s clock if clicked again
             if (bubbleTimeout) clearTimeout(bubbleTimeout);
             
             bubble.innerText = text;
             bubble.style.display = 'block';
             
-            // Remove and re-add class for animation restart
             bubble.style.animation = 'none';
-            bubble.offsetHeight; /* trigger reflow */
+            bubble.offsetHeight; 
             bubble.style.animation = null;
 
             bubbleTimeout = setTimeout(() => { 
                 bubble.style.display = 'none'; 
-            }, 3000); // Now 3 seconds
+            }, 3000);
         }
 
         function accepted() {
