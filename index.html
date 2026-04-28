@@ -3,114 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person | Special Site</title>
+    <title>My Special Dress-Up Girl</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;600&display=swap');
+
         :root {
             --barbie-pink: #ff007f;
-            --soft-pink: #fff0f6;
-            --text-dark: #333;
+            --bisque-beige: #f9f4f0; /* Matches the anime site background */
+            --accent-pink: #ff85a1;
+            --text-color: #4a4a4a;
         }
 
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: white; overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bisque-beige);
+            overflow: hidden;
         }
 
-        /* --- Spy x Family Style Intro --- */
+        /* --- Spy x Family Style Intro with Silhouette --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--barbie-pink);
             display: flex; justify-content: center; align-items: center;
-            z-index: 2000; transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+            z-index: 2000; transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
+            cursor: pointer;
         }
 
         .intro-content {
-            color: white; text-align: center;
+            text-align: center; color: white;
+        }
+
+        .silhouette {
+            width: 300px;
+            /* This makes the Marin image look like a white silhouette */
+            filter: brightness(0) invert(1);
+            opacity: 0.3;
+            margin-bottom: -50px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.5; }
         }
 
         .intro-logo {
-            font-size: 3rem; font-weight: 900; letter-spacing: 5px;
-            border: 4px solid white; padding: 10px 30px; text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem; font-weight: 900; letter-spacing: 8px;
+            border-top: 2px solid white; border-bottom: 2px solid white;
+            padding: 10px 0; margin-top: 20px;
         }
 
-        /* --- Main Site Styling (Bisque Doll Style) --- */
+        /* --- Main Site Styling (Bisque Doll Aesthetic) --- */
         .main-content {
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; height: 100vh;
-            background: radial-gradient(circle, #fff 0%, var(--soft-pink) 100%);
-            opacity: 0; transform: scale(1.1);
-            transition: opacity 1s ease, transform 1s ease;
+            display: flex; align-items: center; justify-content: center;
+            height: 100vh; opacity: 0; transition: opacity 1.5s ease;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Subtle texture */
         }
 
         .container {
-            width: 90%; max-width: 500px; padding: 40px;
-            background: white; border-top: 8px solid var(--barbie-pink);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05); text-align: center;
-            position: relative; z-index: 10;
+            width: 85%; max-width: 600px; padding: 60px;
+            background: white; border: 1px solid #eee;
+            text-align: left; position: relative; z-index: 10;
+            box-shadow: 20px 20px 0px var(--accent-pink);
         }
 
-        h1 { font-size: 1.8rem; color: var(--barbie-pink); letter-spacing: 2px; margin-bottom: 20px; }
-        p { color: var(--text-dark); line-height: 1.8; font-size: 1rem; }
+        h1 { 
+            font-family: 'Playfair Display', serif; font-size: 2.5rem; 
+            color: var(--barbie-pink); margin: 0; font-style: italic;
+        }
+
+        .subtitle {
+            text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem;
+            color: #aaa; margin-bottom: 30px; display: block;
+        }
+
+        p { color: var(--text-color); line-height: 2; font-size: 0.95rem; }
+
+        .btn-group { margin-top: 40px; display: flex; gap: 20px; }
 
         .btn {
-            background: transparent; border: 2px solid var(--barbie-pink);
-            color: var(--barbie-pink); padding: 12px 30px;
-            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-            cursor: pointer; transition: all 0.3s; margin-top: 20px;
+            background: var(--text-color); color: white; border: none;
+            padding: 15px 30px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; font-size: 0.8rem; cursor: pointer;
+            transition: 0.3s;
         }
 
-        .btn:hover { background: var(--barbie-pink); color: white; }
+        .btn:hover { background: var(--barbie-pink); transform: translateY(-3px); }
 
-        /* --- Marin Floating Style --- */
-        .marin-box {
-            position: fixed; bottom: 0; right: 5%; width: 280px; z-index: 50;
+        /* --- Marin PNG Placement --- */
+        .marin-character {
+            position: fixed; bottom: -20px; right: 0%;
+            width: 450px; z-index: 100; pointer-events: none;
+            transition: transform 0.5s ease;
         }
-        .marin-img { width: 100%; }
+
+        .marin-img { width: 100%; filter: drop-shadow(-10px 0 20px rgba(0,0,0,0.1)); }
 
         .speech-bubble {
-            position: absolute; top: -40px; left: -20px;
-            background: var(--barbie-pink); color: white;
-            padding: 10px 20px; border-radius: 5px; font-size: 0.8rem;
-            display: none; font-weight: bold;
+            position: absolute; top: 10%; left: -20%;
+            background: white; border: 2px solid var(--barbie-pink);
+            padding: 15px; border-radius: 50% 50% 50% 0;
+            font-weight: 600; color: var(--barbie-pink); display: none;
+            box-shadow: 5px 5px 0px var(--accent-pink);
         }
 
-        /* --- Interaction Effects --- */
-        .heart { position: absolute; color: var(--barbie-pink); pointer-events: none; }
-
-        @keyframes floatUp {
-            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .marin-character { width: 300px; right: -50px; }
+            .container { padding: 30px; }
+            .intro-logo { font-size: 2rem; }
         }
 
-        #no-btn { position: absolute; font-size: 0.8rem; border-color: #ccc; color: #999; }
+        #no-btn { position: absolute; background: white; color: #ccc; border: 1px solid #eee; }
     </style>
 </head>
 <body>
 
     <div id="intro-overlay" onclick="startExperience()">
         <div class="intro-content">
-            <div class="intro-logo">BARBIE x MARIN</div>
-            <p style="color: white; margin-top: 20px;">CLICK TO ENTER</p>
+            <img src="https://static.wikia.nocookie.net/p__/images/6/65/Kitagawa_Marin-.png" class="silhouette" alt="Silhouette">
+            <div class="intro-logo">MARIN x BARBIE</div>
+            <p style="letter-spacing: 5px; font-size: 0.8rem; margin-top: 20px;">CLICK TO START THE SHOW</p>
         </div>
     </div>
 
     <div class="main-content" id="main-site">
         <div class="container">
-            <h1>Special Delivery ❤️</h1>
-            <p id="msg-text">You are the most dynamic, dazzling person I know. Every day with you feels like a fairytale.</p>
+            <span class="subtitle">Personal Project // 2024</span>
+            <h1>The Most Dynamic Girl in the World</h1>
+            <p id="msg-text">
+                Some people are just born with a spark that makes the world brighter. 
+                You are my real-life Marin, my perfect Barbie, and the person who makes every day feel like a special event.
+            </p>
             
-            <button class="btn" onclick="nextReason()">Reveal a Reason</button>
-            <div id="reason-display" style="margin-top: 15px; font-style: italic; color: #ff007f;"></div>
+            <div id="reason-display" style="margin-top: 20px; font-weight: 600; color: var(--barbie-pink); min-height: 30px;"></div>
 
-            <p style="margin-top: 40px; font-size: 0.8rem; color: #999;">Do you accept this special invitation?</p>
-            <button class="btn" onclick="accepted()">Yes</button>
-            <button class="btn" id="no-btn" onmouseover="dodge()">No</button>
+            <div class="btn-group">
+                <button class="btn" onclick="nextReason()">Next Reason</button>
+                <button class="btn" style="background: var(--barbie-pink);" onclick="accepted()">I Love You</button>
+            </div>
+            
+            <button id="no-btn" class="btn" onmouseover="dodge()">Not feeling it</button>
         </div>
     </div>
 
-    <div class="marin-box">
-        <div id="bubble" class="speech-bubble">SO DYNAMIC!</div>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiQcSLM4frKOr1BSuxy_-ENGXLzVvrjH0Wsw&s" class="marin-img">
+    <div class="marin-character">
+        <div id="bubble" class="speech-bubble">TOO CUTE! ✨</div>
+        <img src="https://static.wikia.nocookie.net/p__/images/6/65/Kitagawa_Marin-.png" class="marin-img" alt="Marin Kitagawa">
     </div>
 
     <script>
@@ -118,17 +159,15 @@
             const intro = document.getElementById('intro-overlay');
             const main = document.getElementById('main-site');
             
-            // Slide up intro (Spy x Family style)
             intro.style.transform = 'translateY(-100%)';
             main.style.opacity = '1';
-            main.style.transform = 'scale(1)';
         }
 
         const reasons = [
-            "Your smile is my favorite view.",
-            "You make everything more fun.",
-            "I love your passion for the things you enjoy.",
-            "You're my real-life Barbie."
+            "Your energy is absolutely infectious.",
+            "I love how you're always 100% yourself.",
+            "You have the most beautiful heart I've ever known.",
+            "Every moment with you is a new favorite memory."
         ];
         let idx = 0;
 
@@ -136,33 +175,24 @@
             document.getElementById('reason-display').innerText = reasons[idx];
             document.getElementById('bubble').style.display = 'block';
             idx = (idx + 1) % reasons.length;
-            spawnHeart();
             setTimeout(() => { document.getElementById('bubble').style.display = 'none'; }, 2000);
         }
 
         function dodge() {
             const btn = document.getElementById('no-btn');
-            btn.style.left = Math.random() * 80 + '%';
-            btn.style.top = Math.random() * 80 + '%';
+            btn.style.left = Math.random() * 70 + '%';
+            btn.style.top = Math.random() * 70 + '%';
         }
 
         function accepted() {
-            document.querySelector('.container').innerHTML = "<h1>It's Official!</h1><p>You're my favorite person forever. Let's make more memories!</p>";
-            document.getElementById('bubble').innerText = "YAY! GOALS!";
+            document.querySelector('.container').innerHTML = `
+                <span class="subtitle">Final Status</span>
+                <h1>Perfect Match! ✨</h1>
+                <p>I knew you were the one. You're stuck with me and Marin now!</p>
+                <button class="btn" onclick="location.reload()">Back to Start</button>
+            `;
+            document.getElementById('bubble').innerText = "YAY! DYNAMIC!";
             document.getElementById('bubble').style.display = 'block';
-            for(let i=0; i<30; i++) setTimeout(spawnHeart, i * 100);
-        }
-
-        function spawnHeart() {
-            const h = document.createElement('div');
-            h.innerHTML = '💖';
-            h.className = 'heart';
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.bottom = '0';
-            h.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            h.style.animation = `floatUp ${Math.random() * 2 + 3}s forwards`;
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 5000);
         }
     </script>
 </body>
