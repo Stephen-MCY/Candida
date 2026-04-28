@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My Special Bebe Darling</title>
     <style>
-        /* Importing fonts for that anime aesthetic */
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap');
 
         :root {
@@ -13,6 +12,7 @@
             --bisque-beige: #f9f4f0;
             --accent-pink: #ff85a1;
             --text-color: #4a4a4a;
+            --btn-highlight: #ff3399;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -34,7 +34,7 @@
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Anime Style Intro Overlay --- */
+        /* --- Intro Overlay --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--barbie-pink);
@@ -42,45 +42,35 @@
             z-index: 2000; transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
             cursor: pointer;
         }
-
         .intro-content { text-align: center; color: white; padding: 20px; }
+        
+        .silhouette { 
+            width: clamp(120px, 40vw, 200px); 
+            filter: brightness(0) invert(1); 
+            opacity: 0.25; 
+            position: absolute;
+            z-index: -1;
+            animation: pulse 3s infinite;
+        }
 
-        /* My Dress-Up Darling Style Logo Styling */
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.25; } 50% { transform: scale(1.05); opacity: 0.35; } }
+
         .intro-logo {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 12vw, 5rem); 
-            font-weight: 900;
-            font-style: italic;
-            line-height: 0.9;
-            text-transform: none;
-            color: white;
+            font-weight: 900; font-style: italic;
+            line-height: 0.9; color: white;
             text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-            margin-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
-
         .intro-logo span {
             font-family: 'Dancing Script', cursive;
-            font-size: 0.5em;
-            display: block;
-            margin-top: -10px;
-            background: white;
-            color: var(--barbie-pink);
-            padding: 2px 15px;
-            transform: rotate(-2deg);
+            font-size: 0.5em; display: block; margin-top: -10px;
+            background: white; color: var(--barbie-pink);
+            padding: 2px 15px; transform: rotate(-2deg);
         }
 
-        .tap-text {
-            letter-spacing: 5px;
-            font-size: 0.7rem;
-            margin-top: 30px;
-            opacity: 0.8;
-            text-transform: uppercase;
-        }
-
-        /* --- Main Site Content --- */
+        /* --- Main Content --- */
         .main-content { opacity: 0; transition: opacity 1.5s ease; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
 
         .hero-banner {
@@ -89,10 +79,8 @@
             border-bottom: 5px solid var(--barbie-pink);
             display: flex; justify-content: center; align-items: center;
         }
-
         .hero-bg-collage { position: absolute; width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center; opacity: 0.7; }
         .hero-img { height: 110%; object-fit: contain; animation: softFloat 4s ease-in-out infinite alternate; }
-        .hero-img:nth-child(2) { animation-delay: 2s; }
         @keyframes softFloat { from { transform: translateY(10px); } to { transform: translateY(-20px); } }
 
         .hero-title {
@@ -108,55 +96,43 @@
             background: white; z-index: 10; position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-
         .washi-tape { position: absolute; top: -15px; left: 15%; width: 120px; height: 35px; background: rgba(255, 0, 127, 0.3); transform: rotate(-3deg); }
 
         h1 { font-family: 'Playfair Display', serif; color: var(--barbie-pink); font-style: italic; }
         
         .btn-group { margin-top: 25px; display: flex; gap: 10px; }
-        .btn { background: var(--text-color); color: white; border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; border-radius: 5px; }
-        .btn:hover { background: var(--barbie-pink); transform: translateY(-2px); }
+        .btn { border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; border-radius: 5px; color: white; }
+        
+        /* Noticeable Next Reason Button */
+        .btn-next { background: var(--btn-highlight); box-shadow: 0 4px 0 #cc297a; }
+        .btn-next:active { transform: translateY(2px); box-shadow: 0 2px 0 #cc297a; }
+        
+        .btn-love { background: var(--text-color); }
+        .btn-love:hover { background: var(--barbie-pink); }
 
-        /* --- Peony & Marin 4 Section --- */
-        .extra-garden {
-            width: 90%; max-width: 600px;
-            display: flex; flex-direction: column; align-items: center;
-            gap: 30px; margin-bottom: 120px;
-        }
+        /* --- Garden Section --- */
+        .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 120px; }
+        .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; }
+        .marin-full-img { width: 100%; border-radius: 15px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
 
-        .quote-box {
-            background: white; padding: 25px; border-radius: 15px;
-            border-left: 8px solid var(--accent-pink);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            font-style: italic; font-size: 0.95rem; line-height: 1.6;
-        }
-
-        .marin-full-img {
-            width: 100%; border-radius: 15px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
-            transition: transform 0.5s;
-        }
-        .marin-full-img:hover { transform: scale(1.02); }
-
-        /* --- Minimal Music Control --- */
-        .music-toggle {
-            position: fixed; top: 20px; right: 20px;
-            z-index: 3000; display: none;
-        }
-        .play-pause-btn {
-            background: var(--barbie-pink); color: white; border: none;
-            width: 45px; height: 45px; border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
-        }
-
+        /* --- Floating Marin & Bubbles --- */
         .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
+        .speech-bubble {
+            position: absolute; top: 10%; left: -30%;
+            background: white; border: 2px solid var(--barbie-pink);
+            padding: 10px 15px; border-radius: 20px 20px 20px 0;
+            font-weight: 600; color: var(--barbie-pink); display: none;
+            box-shadow: 5px 5px 0px var(--accent-pink); z-index: 101;
+            font-size: 0.75rem; width: 140px; text-align: center;
+        }
+
+        .music-toggle { position: fixed; top: 20px; right: 20px; z-index: 3000; display: none; }
+        .play-pause-btn { background: var(--barbie-pink); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
         @media (max-width: 600px) {
             .content-section { margin-top: -30px; padding: 25px; }
             .marin-float { width: 140px; }
-            .hero-banner { height: 40vh; }
+            .speech-bubble { left: -80%; top: -20%; width: 120px; }
         }
     </style>
 </head>
@@ -165,7 +141,7 @@
     <div id="particles-container"></div>
 
     <div class="music-toggle" id="musicToggle">
-        <audio id="bg-music" loop preload="auto">
+        <audio id="bg-music" loop>
             <source src="music.mp3" type="audio/mpeg">
         </audio>
         <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">⏸</button>
@@ -173,11 +149,12 @@
 
     <div id="intro-overlay" onclick="startExperience()">
         <div class="intro-content">
+            <img src="marin.png" class="silhouette">
             <div class="intro-logo">
                 My Bebe Darling
                 <span>Special Someone</span>
             </div>
-            <p class="tap-text">Tap to Start</p>
+            <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 30px; opacity: 0.8; text-transform: uppercase;">Tap to Start</p>
         </div>
     </div>
 
@@ -201,8 +178,8 @@
             <div id="reason-display" style="color: var(--barbie-pink); font-weight: 600; margin: 15px 0; min-height: 24px;"></div>
 
             <div class="btn-group">
-                <button class="btn" onclick="nextReason()">Next Reason</button>
-                <button class="btn" style="background: var(--barbie-pink);" onclick="accepted()">I Love You</button>
+                <button class="btn btn-next" onclick="nextReason()">Next Reason</button>
+                <button class="btn btn-love" onclick="accepted()">I Love You</button>
             </div>
         </main>
 
@@ -211,21 +188,23 @@
                 "A peony represents a happy life and a happy marriage. Just like how you make my life complete." 🌸
             </div>
             
-            <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
-
             <div class="quote-box" style="border-left: 8px solid var(--barbie-pink);">
                 I wanted to fill this space with things as beautiful as you. 🌺
             </div>
+
+            <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
         </div>
     </div>
 
     <div class="marin-float">
+        <div id="bubble" class="speech-bubble">TOO CUTE! ✨</div>
         <img src="marin.png" style="width:100%;">
     </div>
 
     <script>
         const music = document.getElementById('bg-music');
         const playBtn = document.getElementById('playBtn');
+        const bubble = document.getElementById('bubble');
 
         function createParticles() {
             const container = document.getElementById('particles-container');
@@ -244,43 +223,53 @@
         createParticles();
 
         function startExperience() {
-            // Start the music the moment they tap
-            music.play().catch(e => console.log("Music play was blocked, user needs to tap."));
-            
+            music.play().catch(e => console.log("Music play blocked"));
             document.getElementById('intro-overlay').style.transform = 'translateY(-100%)';
             document.getElementById('main-site').style.opacity = '1';
             document.getElementById('musicToggle').style.display = 'block';
         }
 
         function togglePlay() {
-            if (music.paused) {
-                music.play();
-                playBtn.innerText = '⏸';
-            } else {
-                music.pause();
-                playBtn.innerText = '▶';
-            }
+            if (music.paused) { music.play(); playBtn.innerText = '⏸'; } 
+            else { music.pause(); playBtn.innerText = '▶'; }
         }
 
         const reasons = [
             "You are absolutely stunning and gorgeous!",
-            "I'm always here for you.",
-            "You have the most beautiful smile.",
+            "You are the color to my world!",
+            "You have the most beautiful smile!",
             "You're the melody to my favorite song!"
         ];
+        
+        const marinQuotes = [
+            "My gosh! So sweet! ✨",
+            "Waaa! Totally dynamic!",
+            "Gosh, I'm melting! ❤️",
+            "Too cute! I can't!!",
+            "Look at that shine! 🌸"
+        ];
+
         let idx = 0;
 
         function nextReason() {
             document.getElementById('reason-display').innerText = reasons[idx];
+            showBubble(marinQuotes[Math.floor(Math.random() * marinQuotes.length)]);
             idx = (idx + 1) % reasons.length;
         }
 
+        function showBubble(text) {
+            bubble.innerText = text;
+            bubble.style.display = 'block';
+            setTimeout(() => { bubble.style.display = 'none'; }, 2500);
+        }
+
         function accepted() {
+            showBubble("YAY! GOALS!! ❤️");
             document.querySelector('.content-section').innerHTML = `
                 <span class="subtitle">Status: Eternal</span>
                 <h1>Forever & Always ✨</h1>
                 <p>I repeat, I love you like a love song! You're my favorite girl.</p>
-                <button class="btn" onclick="location.reload()">Replay</button>
+                <button class="btn btn-next" onclick="location.reload()">Replay</button>
             `;
         }
     </script>
