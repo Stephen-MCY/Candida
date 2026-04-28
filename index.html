@@ -81,7 +81,7 @@
 
         .main-content { opacity: 0; transition: opacity 1.5s ease; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
 
-        /* --- MARQUEE HERO CARDS --- */
+        /* --- MARQUEE HERO CARDS (Snug Fit Version) --- */
         .hero-banner {
             width: 100%; height: 65vh; background: #fff; position: relative; overflow: hidden;
             border-bottom: 6px solid var(--barbie-pink);
@@ -92,48 +92,43 @@
             display: flex;
             width: fit-content;
             height: 100%;
-            animation: marquee 25s linear infinite;
+            animation: marquee 30s linear infinite;
             align-items: center;
             position: absolute;
             left: 0;
         }
 
-        /* Hero Card Style matching Marin 4 card */
         .hero-card {
-            height: 85%;
+            height: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0 40px; /* Increased side spacing between cards */
+            padding: 0 50px;
         }
 
         .hero-card-inner {
             background: white;
             border: 2px solid var(--barbie-pink);
             border-radius: 15px;
-            height: 100%;
-            width: auto;
-            max-width: 320px; /* Limits width so it hugs the image like marin 4 card */
-            padding: 15px;
+            padding: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            display: inline-block; /* Crucial for snug fit */
+            width: fit-content;
         }
 
         .hero-card-lace {
             border: 2px solid var(--lace-pink);
-            border-radius: 10px;
-            height: 100%;
-            width: 100%;
+            border-radius: 8px;
             overflow: hidden;
-            position: relative;
+            display: block;
+            width: fit-content;
         }
 
         .hero-img { 
-            height: 100%; 
-            width: 100%;
+            height: 45vh; /* Standardized height, width adjusts snugly */
+            width: auto;
+            display: block;
             object-fit: contain;
         }
 
@@ -150,6 +145,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        /* --- Standard Content Sections --- */
         .content-section {
             width: 90%; max-width: 600px;
             margin: 40px auto; padding: 35px;
@@ -187,9 +183,8 @@
         .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
         .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; border-right: 1px solid var(--lace-pink); }
         
-        /* Marin 4 card for reference */
         .marin-card-container {
-            width: 100%; position: relative; padding: 15px;
+            width: fit-content; position: relative; padding: 15px;
             background: white; border-radius: 15px;
             border: 2px solid var(--barbie-pink);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -224,8 +219,7 @@
         }
 
         .marin-full-img { 
-            width: 100%; filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.05));
-            display: block;
+            max-width: 100%; height: auto; display: block;
         }
 
         .card-tape {
@@ -279,9 +273,9 @@
 
         @media (max-width: 600px) {
             .hero-banner { height: 50vh; }
-            .hero-card { padding: 0 20px; } 
-            .hero-card-inner { max-width: 200px; padding: 10px; }
-            .marquee-track { animation: marquee 18s linear infinite; }
+            .hero-card { padding: 0 25px; } 
+            .hero-img { height: 35vh; }
+            .marquee-track { animation: marquee 20s linear infinite; }
             .content-section { padding: 25px; }
             .marin-float { width: 140px; }
             .speech-bubble { left: -70%; top: -15%; width: 130px; }
@@ -380,7 +374,7 @@
         <footer class="page-footer">
             With love, always. 🌸✨
         </footer>
-        <div class="version-label">Site Version 2.13</div>
+        <div class="version-label">Site Version 2.14</div>
     </div>
 
     <div class="marin-float">
