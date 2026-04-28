@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My Special Dress-Up Girl</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;600&display=swap');
@@ -14,108 +14,118 @@
             --text-color: #4a4a4a;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             background-color: var(--bisque-beige);
-            overflow: hidden;
+            overflow: hidden; touch-action: manipulation;
         }
 
-        /* --- Spy x Family Style Intro --- */
+        /* --- Silhouette Intro (DO NOT CHANGE) --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--barbie-pink);
             display: flex; justify-content: center; align-items: center;
-            z-index: 2000; transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
-            cursor: pointer;
+            z-index: 2000; transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
         }
-
-        .intro-content { text-align: center; color: white; padding: 20px; }
-
+        .intro-content { text-align: center; color: white; padding: 20px; cursor: pointer; }
         .silhouette {
-            width: clamp(150px, 50vw, 250px);
+            width: clamp(120px, 40vw, 220px);
             filter: brightness(0) invert(1);
-            opacity: 0.3;
-            margin-bottom: -40px;
+            opacity: 0.3; margin-bottom: -30px;
             animation: pulse 3s infinite ease-in-out;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 0.3; }
             50% { transform: scale(1.05); opacity: 0.5; }
         }
-
         .intro-logo {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 8vw, 3.5rem); 
-            font-weight: 900; letter-spacing: clamp(4px, 2vw, 8px);
+            font-size: clamp(1.5rem, 7vw, 3rem); 
+            font-weight: 900; letter-spacing: 5px;
             border-top: 2px solid white; border-bottom: 2px solid white;
-            padding: 10px 0; margin-top: 20px;
+            padding: 10px 0; margin-top: 15px;
         }
 
-        /* --- Main Site Styling --- */
+        /* --- Main Content Layout --- */
         .main-content {
             display: flex; align-items: center; justify-content: center;
-            height: 100vh; opacity: 0; transition: opacity 1.5s ease;
+            height: 100vh; opacity: 0; transition: opacity 1s ease;
             background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
-            padding: 15px;
+            padding: 20px;
         }
 
         .container {
-            width: 100%; max-width: 550px; padding: clamp(20px, 6vw, 50px);
-            background: white; border: 1px solid #eee;
+            width: 100%; max-width: 500px; 
+            padding: clamp(20px, 5vw, 45px);
+            /* Added slight transparency to see Marin through the box */
+            background: rgba(255, 255, 255, 0.92); 
+            border: 1px solid #eee;
             text-align: left; position: relative; z-index: 10;
-            box-shadow: 15px 15px 0px var(--accent-pink);
+            box-shadow: 10px 10px 0px var(--accent-pink);
         }
 
         h1 { 
-            font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 7vw, 2.3rem); 
+            font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 6vw, 2.1rem); 
             color: var(--barbie-pink); margin: 0; font-style: italic;
-            line-height: 1.2;
         }
 
         .subtitle {
-            text-transform: uppercase; letter-spacing: 4px; font-size: 0.6rem;
-            color: #aaa; margin-bottom: 15px; display: block;
+            text-transform: uppercase; letter-spacing: 3px; font-size: 0.6rem;
+            color: #aaa; margin-bottom: 10px; display: block;
         }
 
-        p { color: var(--text-color); line-height: 1.6; font-size: 0.9rem; }
+        p { color: var(--text-color); line-height: 1.5; font-size: 0.85rem; }
 
-        .btn-group { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .btn-group { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
 
         .btn {
             background: var(--text-color); color: white; border: none;
-            padding: 12px 20px; font-weight: 600; text-transform: uppercase;
+            padding: 12px 15px; font-weight: 600; text-transform: uppercase;
             letter-spacing: 1px; font-size: 0.7rem; cursor: pointer;
-            transition: 0.3s; flex: 1; min-width: 120px;
+            transition: 0.3s; flex: 1; min-width: 110px;
         }
 
-        .btn:hover { background: var(--barbie-pink); transform: translateY(-2px); }
+        .btn:hover { background: var(--barbie-pink); }
 
-        /* --- Marin PNG Placement --- */
+        /* --- Marin Characters Placement --- */
         .marin-character {
-            position: fixed; bottom: -5px; right: -5%;
-            width: clamp(180px, 45vw, 450px); z-index: 5;
-            pointer-events: none;
+            position: fixed; z-index: 5;
+            pointer-events: none; transition: 0.5s;
         }
+        .marin-img { width: 100%; filter: drop-shadow(-5px 0 10px rgba(0,0,0,0.1)); }
 
-        .marin-img { width: 100%; filter: drop-shadow(-10px 0 20px rgba(0,0,0,0.1)); }
+        /* Bottom Right (marin.png) */
+        .marin-main { bottom: -5px; right: -5%; width: clamp(200px, 35vw, 450px); }
+
+        /* Top Left (marin2.png) */
+        .marin-top-left { top: -20px; left: -5%; width: clamp(150px, 25vw, 350px); opacity: 0.9; }
+
+        /* Bottom Left (marin3.png) */
+        .marin-bottom-left { bottom: -10px; left: -8%; width: clamp(180px, 30vw, 400px); opacity: 0.85; }
 
         .speech-bubble {
-            position: absolute; top: 15%; left: -15%;
+            position: absolute; top: 15%; left: -10%;
             background: white; border: 2px solid var(--barbie-pink);
-            padding: 10px 15px; border-radius: 20px 20px 20px 0;
+            padding: 8px 12px; border-radius: 15px 15px 15px 0;
             font-weight: 600; color: var(--barbie-pink); display: none;
-            box-shadow: 5px 5px 0px var(--accent-pink); z-index: 101;
-            font-size: 0.7rem;
+            box-shadow: 3px 3px 0px var(--accent-pink); z-index: 101;
+            font-size: 0.65rem;
         }
 
+        /* --- Mobile Responsive Fixes --- */
         @media (max-width: 600px) {
-            .container { box-shadow: 8px 8px 0px var(--accent-pink); }
-            .marin-character { opacity: 0.85; right: -10%; }
-            #no-btn { display: none; } 
+            .main-content { align-items: flex-start; padding-top: 12vh; }
+            .container { max-width: 90%; box-shadow: 7px 7px 0px var(--accent-pink); }
+            
+            /* Scale images down more on mobile to avoid blocking text too much */
+            .marin-main { width: 45vw; right: -10%; z-index: 4; }
+            .marin-top-left { width: 35vw; left: -10%; z-index: 4; }
+            .marin-bottom-left { width: 38vw; left: -10%; z-index: 4; }
+            
+            #no-btn { display: none; }
         }
 
         #no-btn { position: absolute; background: white; color: #ccc; border: 1px solid #eee; }
@@ -123,27 +133,26 @@
 </head>
 <body>
 
-    <div id="intro-overlay" onclick="startExperience()">
+    <div id="intro-overlay" onclick="startExperience()" ontouchstart="startExperience()">
         <div class="intro-content">
             <img src="marin.png" class="silhouette">
             <div class="intro-logo">MARIN x BARBIE</div>
-            <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 20px;">TAP TO START</p>
+            <p style="letter-spacing: 3px; font-size: 0.65rem; margin-top: 15px;">TAP TO START</p>
         </div>
     </div>
 
     <div class="main-content" id="main-site">
         <div class="container">
             <span class="subtitle">Personal Project // 2026</span>
-            <h1>The Most Dynamic Girl in the World</h1>
+            <h1>The Most Dynamic Girl</h1>
             <p id="msg-text">
-                Some people are just born with a spark that makes the world brighter. 
-                You are my real-life Marin, my perfect Barbie, and the person who makes every day special.
+                Some people are born with a spark. You are my real-life Marin and my perfect Barbie. Every day with you is a special event.
             </p>
             
-            <div id="reason-display" style="margin-top: 15px; font-weight: 600; color: var(--barbie-pink); min-height: 25px; font-size: 0.8rem;"></div>
+            <div id="reason-display" style="margin-top: 10px; font-weight: 600; color: var(--barbie-pink); min-height: 20px; font-size: 0.75rem;"></div>
 
             <div class="btn-group">
-                <button class="btn" onclick="nextReason()">Next Reason</button>
+                <button class="btn" onclick="nextReason()">Reason</button>
                 <button class="btn" style="background: var(--barbie-pink);" onclick="accepted()">I Love You</button>
             </div>
             
@@ -151,9 +160,17 @@
         </div>
     </div>
 
-    <div class="marin-character">
+    <div class="marin-character marin-main">
         <div id="bubble" class="speech-bubble">TOO CUTE! ✨</div>
         <img src="marin.png" class="marin-img">
+    </div>
+
+    <div class="marin-character marin-top-left">
+        <img src="marin2.png" class="marin-img">
+    </div>
+
+    <div class="marin-character marin-bottom-left">
+        <img src="marin3.png" class="marin-img">
     </div>
 
     <script>
@@ -164,9 +181,9 @@
 
         const reasons = [
             "Your energy is infectious.",
-            "I love how you're always yourself.",
-            "You have the most beautiful heart.",
-            "Every moment with you is a favorite memory."
+            "You are always yourself.",
+            "You have a beautiful heart.",
+            "Every moment is a memory."
         ];
         let idx = 0;
 
@@ -179,8 +196,8 @@
 
         function dodge() {
             const btn = document.getElementById('no-btn');
-            btn.style.left = Math.random() * 60 + '%';
-            btn.style.top = Math.random() * 60 + '%';
+            btn.style.left = Math.random() * 50 + '%';
+            btn.style.top = Math.random() * 50 + '%';
         }
 
         function accepted() {
@@ -188,9 +205,9 @@
                 <span class="subtitle">Final Status</span>
                 <h1>Perfect Match! ✨</h1>
                 <p>I knew you were the one. You're stuck with me and Marin now!</p>
-                <button class="btn" onclick="location.reload()">Back to Start</button>
+                <button class="btn" onclick="location.reload()">Back</button>
             `;
-            document.getElementById('bubble').innerText = "YAY! DYNAMIC!";
+            document.getElementById('bubble').innerText = "YAY!";
             document.getElementById('bubble').style.display = 'block';
         }
     </script>
