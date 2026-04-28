@@ -35,7 +35,7 @@
         .intro-content { text-align: center; color: white; padding: 20px; }
 
         .silhouette {
-            width: 250px;
+            width: clamp(150px, 50vw, 250px);
             filter: brightness(0) invert(1);
             opacity: 0.3;
             margin-bottom: -40px;
@@ -49,7 +49,7 @@
 
         .intro-logo {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 8vw, 3.5rem); 
+            font-size: clamp(1.8rem, 8vw, 3.5rem); 
             font-weight: 900; letter-spacing: clamp(4px, 2vw, 8px);
             border-top: 2px solid white; border-bottom: 2px solid white;
             padding: 10px 0; margin-top: 20px;
@@ -60,88 +60,87 @@
             display: flex; align-items: center; justify-content: center;
             height: 100vh; opacity: 0; transition: opacity 1.5s ease;
             background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
-            width: 100%; max-width: 600px; padding: clamp(25px, 5vw, 60px);
+            width: 100%; max-width: 550px; padding: clamp(20px, 6vw, 50px);
             background: white; border: 1px solid #eee;
             text-align: left; position: relative; z-index: 10;
             box-shadow: 15px 15px 0px var(--accent-pink);
         }
 
         h1 { 
-            font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 6vw, 2.5rem); 
+            font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 7vw, 2.3rem); 
             color: var(--barbie-pink); margin: 0; font-style: italic;
             line-height: 1.2;
         }
 
         .subtitle {
-            text-transform: uppercase; letter-spacing: 4px; font-size: 0.65rem;
-            color: #aaa; margin-bottom: 20px; display: block;
+            text-transform: uppercase; letter-spacing: 4px; font-size: 0.6rem;
+            color: #aaa; margin-bottom: 15px; display: block;
         }
 
-        p { color: var(--text-color); line-height: 1.8; font-size: 0.9rem; }
+        p { color: var(--text-color); line-height: 1.6; font-size: 0.9rem; }
 
-        .btn-group { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 15px; }
+        .btn-group { margin-top: 25px; display: flex; flex-wrap: wrap; gap: 10px; }
 
         .btn {
             background: var(--text-color); color: white; border: none;
-            padding: 12px 25px; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1px; font-size: 0.75rem; cursor: pointer;
-            transition: 0.3s; flex: 1; min-width: 140px;
+            padding: 12px 20px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; font-size: 0.7rem; cursor: pointer;
+            transition: 0.3s; flex: 1; min-width: 120px;
         }
 
         .btn:hover { background: var(--barbie-pink); transform: translateY(-2px); }
 
         /* --- Marin PNG Placement --- */
         .marin-character {
-            position: fixed; bottom: -10px; right: 0;
-            width: clamp(200px, 40vw, 500px); z-index: 5; /* Lower z-index on mobile */
+            position: fixed; bottom: -5px; right: -5%;
+            width: clamp(180px, 45vw, 450px); z-index: 5;
             pointer-events: none;
         }
 
         .marin-img { width: 100%; filter: drop-shadow(-10px 0 20px rgba(0,0,0,0.1)); }
 
         .speech-bubble {
-            position: absolute; top: 10%; left: -10%;
+            position: absolute; top: 15%; left: -15%;
             background: white; border: 2px solid var(--barbie-pink);
             padding: 10px 15px; border-radius: 20px 20px 20px 0;
             font-weight: 600; color: var(--barbie-pink); display: none;
             box-shadow: 5px 5px 0px var(--accent-pink); z-index: 101;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
-        /* --- Mobile Specific Tweaks --- */
         @media (max-width: 600px) {
-            .container { box-shadow: 10px 10px 0px var(--accent-pink); }
-            .marin-character { opacity: 0.9; right: -20px; }
-            #no-btn { display: none; } /* Removing the running button on small touch screens as it's frustrating */
+            .container { box-shadow: 8px 8px 0px var(--accent-pink); }
+            .marin-character { opacity: 0.85; right: -10%; }
+            #no-btn { display: none; } 
         }
 
-        #no-btn { position: absolute; background: white; color: #ccc; border: 1px solid #eee; min-width: 80px; }
+        #no-btn { position: absolute; background: white; color: #ccc; border: 1px solid #eee; }
     </style>
 </head>
 <body>
 
     <div id="intro-overlay" onclick="startExperience()">
         <div class="intro-content">
-            <img src="https://i.postimg.co/0yM7pXm8/marin-render.png" class="silhouette">
+            <img src="marin.png" class="silhouette">
             <div class="intro-logo">MARIN x BARBIE</div>
-            <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 20px;">TAP TO START THE SHOW</p>
+            <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 20px;">TAP TO START</p>
         </div>
     </div>
 
     <div class="main-content" id="main-site">
         <div class="container">
-            <span class="subtitle">Special Project // 2024</span>
+            <span class="subtitle">Personal Project // 2026</span>
             <h1>The Most Dynamic Girl in the World</h1>
             <p id="msg-text">
                 Some people are just born with a spark that makes the world brighter. 
                 You are my real-life Marin, my perfect Barbie, and the person who makes every day special.
             </p>
             
-            <div id="reason-display" style="margin-top: 15px; font-weight: 600; color: var(--barbie-pink); min-height: 25px; font-size: 0.85rem;"></div>
+            <div id="reason-display" style="margin-top: 15px; font-weight: 600; color: var(--barbie-pink); min-height: 25px; font-size: 0.8rem;"></div>
 
             <div class="btn-group">
                 <button class="btn" onclick="nextReason()">Next Reason</button>
@@ -154,7 +153,7 @@
 
     <div class="marin-character">
         <div id="bubble" class="speech-bubble">TOO CUTE! ✨</div>
-        <img src="https://i.postimg.co/0yM7pXm8/marin-render.png" class="marin-img">
+        <img src="marin.png" class="marin-img">
     </div>
 
     <script>
@@ -165,7 +164,7 @@
 
         const reasons = [
             "Your energy is infectious.",
-            "I love how you're always 100% yourself.",
+            "I love how you're always yourself.",
             "You have the most beautiful heart.",
             "Every moment with you is a favorite memory."
         ];
