@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My Special Bebe Darling</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;600&display=swap');
+        /* Importing fonts for that anime aesthetic */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap');
 
         :root {
             --barbie-pink: #ff007f;
@@ -33,29 +34,53 @@
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Intro Overlay --- */
+        /* --- Anime Style Intro Overlay --- */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--barbie-pink);
             display: flex; justify-content: center; align-items: center;
             z-index: 2000; transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
-        }
-        .intro-content { text-align: center; color: white; padding: 20px; cursor: pointer; }
-        .silhouette { width: 180px; filter: brightness(0) invert(1); opacity: 0.3; animation: pulse 3s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        
-        /* Anime Style Logo */
-        .intro-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 10vw, 4rem); 
-            font-weight: 900; line-height: 1;
-            text-transform: uppercase;
-            border-bottom: 8px solid white;
-            padding-bottom: 5px; margin-top: 10px;
-            font-style: italic;
+            cursor: pointer;
         }
 
-        /* --- Main Content --- */
+        .intro-content { text-align: center; color: white; padding: 20px; }
+
+        /* My Dress-Up Darling Style Logo Styling */
+        .intro-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 12vw, 5rem); 
+            font-weight: 900;
+            font-style: italic;
+            line-height: 0.9;
+            text-transform: none;
+            color: white;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-logo span {
+            font-family: 'Dancing Script', cursive;
+            font-size: 0.5em;
+            display: block;
+            margin-top: -10px;
+            background: white;
+            color: var(--barbie-pink);
+            padding: 2px 15px;
+            transform: rotate(-2deg);
+        }
+
+        .tap-text {
+            letter-spacing: 5px;
+            font-size: 0.7rem;
+            margin-top: 30px;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        /* --- Main Site Content --- */
         .main-content { opacity: 0; transition: opacity 1.5s ease; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
 
         .hero-banner {
@@ -65,35 +90,23 @@
             display: flex; justify-content: center; align-items: center;
         }
 
-        .hero-bg-collage { position: absolute; width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center; opacity: 0.6; }
-        .hero-img { height: 100%; object-fit: contain; animation: softFloat 4s ease-in-out infinite alternate; }
+        .hero-bg-collage { position: absolute; width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center; opacity: 0.7; }
+        .hero-img { height: 110%; object-fit: contain; animation: softFloat 4s ease-in-out infinite alternate; }
         .hero-img:nth-child(2) { animation-delay: 2s; }
-        @keyframes softFloat { from { transform: translateY(5px); } to { transform: translateY(-15px); } }
+        @keyframes softFloat { from { transform: translateY(10px); } to { transform: translateY(-20px); } }
 
         .hero-title {
             z-index: 5; text-align: center;
             background: rgba(255, 255, 255, 0.9);
             padding: 15px 30px; border: 2px dashed var(--barbie-pink);
+            transform: rotate(-1deg);
         }
 
         .content-section {
             width: 90%; max-width: 600px;
-            margin: -50px auto 30px; padding: 35px;
+            margin: -50px auto 40px; padding: 35px;
             background: white; z-index: 10; position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        /* Peony Decorations */
-        .peony-decor {
-            width: 100%; max-width: 600px; padding: 20px;
-            display: flex; flex-direction: column; align-items: center; gap: 40px;
-            margin-bottom: 100px;
-        }
-        .peony-card {
-            background: white; width: 100%; padding: 20px;
-            border-radius: 10px; border-left: 5px solid var(--accent-pink);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            font-style: italic; color: var(--text-color);
         }
 
         .washi-tape { position: absolute; top: -15px; left: 15%; width: 120px; height: 35px; background: rgba(255, 0, 127, 0.3); transform: rotate(-3deg); }
@@ -101,27 +114,49 @@
         h1 { font-family: 'Playfair Display', serif; color: var(--barbie-pink); font-style: italic; }
         
         .btn-group { margin-top: 25px; display: flex; gap: 10px; }
-        .btn { background: var(--text-color); color: white; border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; }
-        .btn:hover { background: var(--barbie-pink); }
+        .btn { background: var(--text-color); color: white; border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; border-radius: 5px; }
+        .btn:hover { background: var(--barbie-pink); transform: translateY(-2px); }
 
-        /* --- Minimal Music Player --- */
-        .music-player-mini {
+        /* --- Peony & Marin 4 Section --- */
+        .extra-garden {
+            width: 90%; max-width: 600px;
+            display: flex; flex-direction: column; align-items: center;
+            gap: 30px; margin-bottom: 120px;
+        }
+
+        .quote-box {
+            background: white; padding: 25px; border-radius: 15px;
+            border-left: 8px solid var(--accent-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-style: italic; font-size: 0.95rem; line-height: 1.6;
+        }
+
+        .marin-full-img {
+            width: 100%; border-radius: 15px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            transition: transform 0.5s;
+        }
+        .marin-full-img:hover { transform: scale(1.02); }
+
+        /* --- Minimal Music Control --- */
+        .music-toggle {
             position: fixed; top: 20px; right: 20px;
             z-index: 3000; display: none;
         }
-        .play-pause-circle {
+        .play-pause-btn {
             background: var(--barbie-pink); color: white; border: none;
             width: 45px; height: 45px; border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer;
-            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
         }
 
-        .marin-float { position: fixed; bottom: -10px; right: -10px; width: 200px; z-index: 100; pointer-events: none; opacity: 0.8; }
+        .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
+            .content-section { margin-top: -30px; padding: 25px; }
+            .marin-float { width: 140px; }
             .hero-banner { height: 40vh; }
-            .content-section { margin-top: -30px; }
-            .marin-float { width: 130px; }
         }
     </style>
 </head>
@@ -129,18 +164,20 @@
 
     <div id="particles-container"></div>
 
-    <div class="music-player-mini" id="miniPlayer">
-        <audio id="bg-music" loop>
+    <div class="music-toggle" id="musicToggle">
+        <audio id="bg-music" loop preload="auto">
             <source src="music.mp3" type="audio/mpeg">
         </audio>
-        <button class="play-pause-circle" id="playBtn" onclick="togglePlay()">⏸</button>
+        <button class="play-pause-btn" id="playBtn" onclick="togglePlay()">⏸</button>
     </div>
 
     <div id="intro-overlay" onclick="startExperience()">
         <div class="intro-content">
-            <img src="marin.png" class="silhouette">
-            <div class="intro-logo">My Bebe Darling</div>
-            <p style="letter-spacing: 3px; font-size: 0.65rem; margin-top: 25px;">TAP TO START</p>
+            <div class="intro-logo">
+                My Bebe Darling
+                <span>Special Someone</span>
+            </div>
+            <p class="tap-text">Tap to Start</p>
         </div>
     </div>
 
@@ -169,15 +206,16 @@
             </div>
         </main>
 
-        <div class="peony-decor">
-            <div class="peony-card">
+        <div class="extra-garden">
+            <div class="quote-box">
                 "A peony represents a happy life and a happy marriage. Just like how you make my life complete." 🌸
             </div>
-            <div style="font-size: 3rem;">🌸 ✨ 🌸</div>
-            <div class="peony-card">
+            
+            <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
+
+            <div class="quote-box" style="border-left: 8px solid var(--barbie-pink);">
                 I wanted to fill this space with things as beautiful as you. 🌺
             </div>
-            <img src="marin2.png" style="width: 80%; border-radius: 20px; opacity: 0.9;">
         </div>
     </div>
 
@@ -206,10 +244,12 @@
         createParticles();
 
         function startExperience() {
+            // Start the music the moment they tap
+            music.play().catch(e => console.log("Music play was blocked, user needs to tap."));
+            
             document.getElementById('intro-overlay').style.transform = 'translateY(-100%)';
             document.getElementById('main-site').style.opacity = '1';
-            document.getElementById('miniPlayer').style.display = 'block';
-            music.play();
+            document.getElementById('musicToggle').style.display = 'block';
         }
 
         function togglePlay() {
