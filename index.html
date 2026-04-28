@@ -16,7 +16,6 @@
             --btn-highlight: #ff3399;
         }
 
-        /* --- Dainty Lace Pattern --- */
         .lace-trim {
             width: 100%; height: 25px;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0 0 Q 5 20 10 0 T 20 0 T 30 0 T 40 0 T 50 0 T 60 0 T 70 0 T 80 0 T 90 0 T 100 0' fill='%23ffb3d1'/%3E%3Ccircle cx='5' cy='5' r='1' fill='white'/%3E%3Ccircle cx='15' cy='5' r='1' fill='white'/%3E%3Ccircle cx='25' cy='5' r='1' fill='white'/%3E%3Ccircle cx='35' cy='5' r='1' fill='white'/%3E%3Ccircle cx='45' cy='5' r='1' fill='white'/%3E%3Ccircle cx='55' cy='5' r='1' fill='white'/%3E%3Ccircle cx='65' cy='5' r='1' fill='white'/%3E%3Ccircle cx='75' cy='5' r='1' fill='white'/%3E%3Ccircle cx='85' cy='5' r='1' fill='white'/%3E%3Ccircle cx='95' cy='5' r='1' fill='white'/%3E%3C/svg%3E");
@@ -47,34 +46,23 @@
             z-index: 2000; transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1); cursor: pointer;
         }
         .intro-content { position: relative; text-align: center; color: white; padding: 20px; display: flex; justify-content: center; align-items: center; }
-        
-        .silhouette { 
-            width: clamp(200px, 60vw, 350px); filter: brightness(0) invert(1); opacity: 0.4;
-            position: absolute; z-index: -1; animation: pulse 3s infinite ease-in-out;
-        }
+        .silhouette { width: clamp(200px, 60vw, 350px); filter: brightness(0) invert(1); opacity: 0.4; position: absolute; z-index: -1; animation: pulse 3s infinite ease-in-out; }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.08); opacity: 0.55; } }
 
-        .intro-logo {
-            font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 12vw, 5rem); 
-            font-weight: 900; font-style: italic; line-height: 0.9; color: white;
-            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; align-items: center;
-        }
-        .intro-logo span {
-            font-family: 'Dancing Script', cursive; font-size: 0.5em; display: block; margin-top: -10px;
-            background: white; color: var(--barbie-pink); padding: 2px 15px; transform: rotate(-2deg);
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-        }
+        .intro-logo { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 12vw, 5rem); font-weight: 900; font-style: italic; line-height: 0.9; color: white; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; align-items: center; }
+        .intro-logo span { font-family: 'Dancing Script', cursive; font-size: 0.5em; display: block; margin-top: -10px; background: white; color: var(--barbie-pink); padding: 2px 15px; transform: rotate(-2deg); box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); }
 
         .main-content { opacity: 0; transition: opacity 1.5s ease; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; }
 
-        /* --- MARQUEE HERO CARDS --- */
+        /* --- v2.19 SMOOTH MARQUEE --- */
         .hero-banner {
             width: 100%; height: 65vh; background: #fff; position: relative; overflow: hidden;
             border-bottom: 6px solid var(--barbie-pink); display: flex; align-items: center;
         }
 
         .marquee-track {
-            display: flex; width: max-content; height: 100%; animation: marquee 40s linear infinite;
+            display: flex; width: max-content; height: 100%; 
+            animation: marquee 35s linear infinite; /* Increased duration for smoothness */
             align-items: center; position: absolute; left: 0; gap: 0;
         }
 
@@ -88,13 +76,13 @@
             padding: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: inline-block; width: fit-content;
         }
 
-        .hero-card-lace {
-            border: 2px solid var(--lace-pink); border-radius: 8px; overflow: hidden; display: block; width: fit-content;
-        }
-
+        .hero-card-lace { border: 2px solid var(--lace-pink); border-radius: 8px; overflow: hidden; display: block; width: fit-content; }
         .hero-img { height: 45vh; width: auto; display: block; object-fit: contain; }
 
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes marquee { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50.05%); } /* Overshoot slightly for sub-pixel smoothness */
+        }
 
         .hero-title {
             z-index: 5; text-align: center; background: rgba(255, 255, 255, 0.95);
@@ -111,109 +99,54 @@
         .washi-tape { position: absolute; top: -15px; left: 15%; width: 120px; height: 35px; background: rgba(255, 0, 127, 0.3); transform: rotate(-3deg); }
 
         h1 { font-family: 'Playfair Display', serif; color: var(--barbie-pink); font-style: italic; }
-        
         .btn-group { margin-top: 40px; display: flex; gap: 10px; position: relative; }
         .btn { border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; border-radius: 5px; color: white; position: relative; }
         .btn-next { background: var(--btn-highlight); box-shadow: 0 4px 0 #cc297a; }
-        .btn-next:active { transform: translateY(2px); box-shadow: 0 2px 0 #cc297a; }
         .btn-love { background: var(--text-color); }
-        .btn-love:hover { background: var(--barbie-pink); }
 
         .prompt {
             position: absolute; top: 60px; background: var(--barbie-pink); color: white;
             padding: 4px 10px; border-radius: 10px; font-size: 0.65rem; font-weight: bold;
             animation: bounce 1.5s infinite; white-space: nowrap; z-index: 100;
         }
-        .prompt::after {
-            content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-            border-width: 5px; border-style: solid; border-color: transparent transparent var(--barbie-pink) transparent;
-        }
+        .prompt::after { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); border-width: 5px; border-style: solid; border-color: transparent transparent var(--barbie-pink) transparent; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
         .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
-        .quote-box {
-            background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6;
-            width: 100%; border-right: 1px solid var(--lace-pink);
-        }
-        
-        .marin-card-container {
-            width: fit-content; position: relative; padding: 15px; background: white;
-            border-radius: 15px; border: 2px solid var(--barbie-pink);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); animation: cardFloat 5s ease-in-out infinite;
-        }
-        @keyframes cardFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
-
+        .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; border-right: 1px solid var(--lace-pink); }
+        .marin-card-container { width: fit-content; position: relative; padding: 15px; background: white; border-radius: 15px; border: 2px solid var(--barbie-pink); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); animation: cardFloat 5s ease-in-out infinite; }
         .marin-card-inner { border: 2px solid var(--lace-pink); border-radius: 10px; overflow: hidden; display: block; position: relative; }
-        .marin-card-inner::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: skewX(-25deg); animation: shimmer 4s infinite;
-        }
-        @keyframes shimmer { 0% { left: -100%; } 30%, 100% { left: 150%; } }
-
         .marin-full-img { max-width: 100%; height: auto; display: block; }
+        .card-tape { position: absolute; top: -10px; right: 10px; width: 90px; height: 30px; background: rgba(255, 127, 161, 0.4); transform: rotate(5deg); z-index: 2; border: 1px dashed rgba(255, 255, 255, 0.6); }
+        .card-title { text-align: center; margin-top: 15px; color: var(--barbie-pink); font-family: 'Dancing Script', cursive; font-size: 1.8rem; text-shadow: 0 0 10px rgba(255, 0, 127, 0.2); animation: wiggle 2s ease-in-out infinite; display: inline-block; width: 100%; }
 
-        .card-tape {
-            position: absolute; top: -10px; right: 10px; width: 90px; height: 30px;
-            background: rgba(255, 127, 161, 0.4); transform: rotate(5deg); z-index: 2; border: 1px dashed rgba(255, 255, 255, 0.6);
-        }
-
-        .card-title {
-            text-align: center; margin-top: 15px; color: var(--barbie-pink); font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem; text-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
-            animation: wiggle 2s ease-in-out infinite; display: inline-block; width: 100%;
-        }
-        @keyframes wiggle { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1) rotate(-1deg); } }
-
-        .page-footer {
-            width: 100%; text-align: center; padding: 40px 20px 20px 20px; font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem; color: var(--barbie-pink); opacity: 0.8; background-color: white;
-        }
-
+        .page-footer { width: 100%; text-align: center; padding: 40px 20px 20px 20px; font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--barbie-pink); opacity: 0.8; background-color: white; }
         .version-label { font-size: 0.6rem; color: #ccc; text-align: center; width: 100%; padding-bottom: 110px; }
 
-        /* --- v2.18: Floating Marin & Fixed Speech Bubble Positioning --- */
         .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; display: flex; flex-direction: column; align-items: center; }
-        
         .speech-bubble {
             background: white; border: 2.5px solid var(--barbie-pink); padding: 12px 18px;
             border-radius: 20px 20px 0px 20px; font-weight: 600; color: var(--barbie-pink);
             display: none; box-shadow: -6px 6px 0px var(--accent-pink); z-index: 101;
             font-size: 0.8rem; width: 150px; text-align: center;
-            margin-bottom: -15px; 
-            margin-right: 160px; /* PC Default: To the LEFT of her head */
+            margin-bottom: -15px; margin-right: 160px;
             animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
         .music-toggle { position: fixed; top: 20px; right: 20px; z-index: 3000; display: none; }
-        .play-pause-btn {
-            background: var(--barbie-pink); color: white; border: none; width: 45px; height: 45px;
-            border-radius: 50%; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-        }
+        .play-pause-btn { background: var(--barbie-pink); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
         @media (max-width: 600px) {
             .hero-banner { height: 50vh; }
             .hero-card { padding: 0 15px; } 
             .hero-img { height: 35vh; }
             .marquee-track { animation: marquee 25s linear infinite; }
-            .content-section { padding: 25px; }
             .marin-float { width: 140px; }
-            
-            /* v2.18 Mobile Bubble: Moved Left (~1.5in/144px) and Up (~0.5in/48px) */
             .speech-bubble { 
-                margin-right: 0; 
-                margin-bottom: 0;
-                position: absolute; 
-                bottom: 105%; /* Moved Up */
-                right: 75%; /* Moved Left */
-                border-radius: 20px 20px 20px 0; 
-                box-shadow: 6px 6px 0px var(--accent-pink); /* Flipped shadow to match position */
-                width: 125px; 
+                margin-right: 0; margin-bottom: 0; position: absolute; 
+                bottom: 105%; right: 75%; 
+                border-radius: 20px 20px 20px 0; box-shadow: 6px 6px 0px var(--accent-pink); width: 125px; 
             }
-            .prompt { top: 55px; }
         }
     </style>
 </head>
@@ -271,7 +204,7 @@
         </div>
         <div class="lace-trim"></div>
         <footer class="page-footer"> With love, always. 🌸✨ </footer>
-        <div class="version-label">Site Version 2.18</div>
+        <div class="version-label">Site Version 2.19</div>
     </div>
     <div class="marin-float">
         <div id="bubble" class="speech-bubble">TOO CUTE! ✨</div>
