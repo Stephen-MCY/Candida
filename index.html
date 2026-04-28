@@ -42,25 +42,25 @@
             z-index: 2000; transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
             cursor: pointer;
         }
-        .intro-content { text-align: center; color: white; padding: 20px; }
+        .intro-content { position: relative; text-align: center; color: white; padding: 20px; display: flex; justify-content: center; align-items: center; }
         
         .silhouette { 
-            width: clamp(120px, 40vw, 200px); 
+            width: clamp(200px, 60vw, 350px); 
             filter: brightness(0) invert(1); 
-            opacity: 0.25; 
+            opacity: 0.4; /* More noticeable */
             position: absolute;
             z-index: -1;
-            animation: pulse 3s infinite;
+            animation: pulse 3s infinite ease-in-out;
         }
 
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.25; } 50% { transform: scale(1.05); opacity: 0.35; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.08); opacity: 0.55; } }
 
         .intro-logo {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 12vw, 5rem); 
             font-weight: 900; font-style: italic;
             line-height: 0.9; color: white;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
             display: flex; flex-direction: column; align-items: center;
         }
         .intro-logo span {
@@ -68,6 +68,7 @@
             font-size: 0.5em; display: block; margin-top: -10px;
             background: white; color: var(--barbie-pink);
             padding: 2px 15px; transform: rotate(-2deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
         /* --- Main Content --- */
@@ -100,31 +101,47 @@
 
         h1 { font-family: 'Playfair Display', serif; color: var(--barbie-pink); font-style: italic; }
         
-        .btn-group { margin-top: 25px; display: flex; gap: 10px; }
-        .btn { border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; border-radius: 5px; color: white; }
+        .btn-group { margin-top: 40px; display: flex; gap: 10px; position: relative; }
+        .btn { border: none; padding: 15px; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; cursor: pointer; flex: 1; transition: 0.3s; border-radius: 5px; color: white; position: relative; }
         
-        /* Noticeable Next Reason Button */
         .btn-next { background: var(--btn-highlight); box-shadow: 0 4px 0 #cc297a; }
         .btn-next:active { transform: translateY(2px); box-shadow: 0 2px 0 #cc297a; }
         
         .btn-love { background: var(--text-color); }
         .btn-love:hover { background: var(--barbie-pink); }
 
+        /* --- Press Me Prompts --- */
+        .prompt {
+            position: absolute; top: -45px; background: var(--barbie-pink);
+            color: white; padding: 4px 10px; border-radius: 10px;
+            font-size: 0.65rem; font-weight: bold; animation: bounce 1.5s infinite;
+            white-space: nowrap;
+        }
+        .prompt::after {
+            content: ''; position: absolute; bottom: -8px; left: 50%;
+            transform: translateX(-50%); border-width: 5px; border-style: solid;
+            border-color: var(--barbie-pink) transparent transparent transparent;
+        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
         /* --- Garden Section --- */
         .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 120px; }
         .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; }
         .marin-full-img { width: 100%; border-radius: 15px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
 
-        /* --- Floating Marin & Bubbles --- */
+        /* --- Floating Marin & Bubbly Reaction --- */
         .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
         .speech-bubble {
-            position: absolute; top: 10%; left: -30%;
-            background: white; border: 2px solid var(--barbie-pink);
-            padding: 10px 15px; border-radius: 20px 20px 20px 0;
+            position: absolute; top: 0%; left: -30%;
+            background: white; border: 2.5px solid var(--barbie-pink);
+            padding: 12px 18px; border-radius: 25px 25px 25px 0;
             font-weight: 600; color: var(--barbie-pink); display: none;
-            box-shadow: 5px 5px 0px var(--accent-pink); z-index: 101;
-            font-size: 0.75rem; width: 140px; text-align: center;
+            box-shadow: 6px 6px 0px var(--accent-pink); z-index: 101;
+            font-size: 0.8rem; width: 160px; text-align: center;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
+        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
         .music-toggle { position: fixed; top: 20px; right: 20px; z-index: 3000; display: none; }
         .play-pause-btn { background: var(--barbie-pink); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
@@ -132,7 +149,8 @@
         @media (max-width: 600px) {
             .content-section { margin-top: -30px; padding: 25px; }
             .marin-float { width: 140px; }
-            .speech-bubble { left: -80%; top: -20%; width: 120px; }
+            .speech-bubble { left: -85%; top: -25%; width: 130px; }
+            .prompt { font-size: 0.55rem; padding: 3px 7px; top: -35px; }
         }
     </style>
 </head>
@@ -154,7 +172,7 @@
                 My Bebe Darling
                 <span>Special Someone</span>
             </div>
-            <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 30px; opacity: 0.8; text-transform: uppercase;">Tap to Start</p>
+            <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 50px; opacity: 0.9; text-transform: uppercase; font-weight: bold;">Tap to Start</p>
         </div>
     </div>
 
@@ -178,7 +196,10 @@
             <div id="reason-display" style="color: var(--barbie-pink); font-weight: 600; margin: 15px 0; min-height: 24px;"></div>
 
             <div class="btn-group">
+                <div class="prompt" style="left: 15%;">Press me! ↓</div>
                 <button class="btn btn-next" onclick="nextReason()">Next Reason</button>
+                
+                <div class="prompt" style="right: 15%;">Press me! ↓</div>
                 <button class="btn btn-love" onclick="accepted()">I Love You</button>
             </div>
         </main>
@@ -205,6 +226,7 @@
         const music = document.getElementById('bg-music');
         const playBtn = document.getElementById('playBtn');
         const bubble = document.getElementById('bubble');
+        let bubbleTimeout;
 
         function createParticles() {
             const container = document.getElementById('particles-container');
@@ -246,7 +268,9 @@
             "Waaa! Totally dynamic!",
             "Gosh, I'm melting! ❤️",
             "Too cute! I can't!!",
-            "Look at that shine! 🌸"
+            "Look at that shine! 🌸",
+            "Eeee! So romatic! 💕",
+            "My heart... it's full! 🎀"
         ];
 
         let idx = 0;
@@ -258,9 +282,20 @@
         }
 
         function showBubble(text) {
+            // Clear existing timeout to reset the 3s clock if clicked again
+            if (bubbleTimeout) clearTimeout(bubbleTimeout);
+            
             bubble.innerText = text;
             bubble.style.display = 'block';
-            setTimeout(() => { bubble.style.display = 'none'; }, 2500);
+            
+            // Remove and re-add class for animation restart
+            bubble.style.animation = 'none';
+            bubble.offsetHeight; /* trigger reflow */
+            bubble.style.animation = null;
+
+            bubbleTimeout = setTimeout(() => { 
+                bubble.style.display = 'none'; 
+            }, 3000); // Now 3 seconds
         }
 
         function accepted() {
