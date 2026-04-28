@@ -75,7 +75,7 @@
 
         .marquee-track {
             display: flex; width: max-content; height: 100%; animation: marquee 30s linear infinite;
-            align-items: center; position: absolute; left: 0;
+            align-items: center; position: absolute; left: 0; gap: 0;
         }
 
         .hero-card {
@@ -173,14 +173,15 @@
 
         .version-label { font-size: 0.6rem; color: #ccc; text-align: center; width: 100%; padding-bottom: 110px; }
 
-        /* --- Floating Marin & Reaction Fix for PC --- */
-        .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; }
+        /* --- Floating Marin & Reaction Bubble --- */
+        .marin-float { position: fixed; bottom: -10px; right: -10px; width: 220px; z-index: 100; pointer-events: none; opacity: 0.9; display: flex; flex-direction: column; align-items: center; }
         .speech-bubble {
-            position: absolute; bottom: 85%; right: 40%; /* Position bubble to the left and above her head on PC */
             background: white; border: 2.5px solid var(--barbie-pink); padding: 12px 18px;
             border-radius: 20px 20px 0px 20px; font-weight: 600; color: var(--barbie-pink);
             display: none; box-shadow: -6px 6px 0px var(--accent-pink); z-index: 101;
             font-size: 0.8rem; width: 150px; text-align: center;
+            margin-bottom: -20px; /* Pull closer to image */
+            margin-right: 180px; /* Push bubble to the LEFT of her face on PC */
             animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
@@ -194,13 +195,12 @@
 
         @media (max-width: 600px) {
             .hero-banner { height: 50vh; }
-            .hero-card { padding: 0 25px; } 
+            .hero-card { padding: 0 20px; } 
             .hero-img { height: 35vh; }
             .marquee-track { animation: marquee 20s linear infinite; }
             .content-section { padding: 25px; }
             .marin-float { width: 140px; }
-            /* Mobile bubble positioning reset */
-            .speech-bubble { bottom: 70%; right: 50%; border-radius: 20px 20px 20px 0; box-shadow: 6px 6px 0px var(--accent-pink); width: 130px; }
+            .speech-bubble { margin-right: 0; margin-bottom: 0; position: absolute; bottom: 70%; right: 50%; border-radius: 20px 20px 20px 0; box-shadow: 6px 6px 0px var(--accent-pink); width: 130px; }
             .prompt { top: 55px; }
         }
     </style>
@@ -250,12 +250,12 @@
             <div class="marin-card-container">
                 <div class="card-tape"></div>
                 <div class="marin-card-inner"> <img src="marin4.png" class="marin-full-img" alt="Marin Garden"> </div>
-                <div class="card-title">you're a cutieee!!!</div>
+                <div class="card-title">You're a cutieee!!!</div>
             </div>
         </div>
         <div class="lace-trim"></div>
         <footer class="page-footer"> With love, always. 🌸✨ </footer>
-        <div class="version-label">Site Version 2.15</div>
+        <div class="version-label">Site Version 2.16</div>
     </div>
     <div class="marin-float">
         <div id="bubble" class="speech-bubble">TOO CUTE! ✨</div>
