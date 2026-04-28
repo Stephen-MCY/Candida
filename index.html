@@ -144,13 +144,31 @@
         .btn-love { background: var(--text-color); }
         .btn-love:hover { background: var(--barbie-pink); }
 
+        /* --- Press Me Prompts --- */
+        .prompt {
+            position: absolute; 
+            top: 60px; /* Moved below buttons to stop blocking text above */
+            background: var(--barbie-pink);
+            color: white; padding: 4px 10px; border-radius: 10px;
+            font-size: 0.65rem; font-weight: bold; animation: bounce 1.5s infinite;
+            white-space: nowrap;
+            z-index: 100;
+        }
+        .prompt::after {
+            content: ''; position: absolute; top: -8px; left: 50%; /* Arrow points UP now */
+            transform: translateX(-50%); border-width: 5px; border-style: solid;
+            border-color: transparent transparent var(--barbie-pink) transparent;
+        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
         /* --- Garden Section --- */
         .extra-garden { width: 90%; max-width: 600px; display: flex; flex-direction: column; align-items: center; gap: 30px; margin-bottom: 40px; }
         .quote-box { background: white; padding: 25px; border-radius: 15px; border-left: 8px solid var(--accent-pink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-style: italic; font-size: 0.95rem; line-height: 1.6; width: 100%; border-right: 1px solid var(--lace-pink); }
         
         .marin-full-img { 
-            width: 100%; border-radius: 15px 15px 0 0; 
+            width: 100%; border-radius: 15px; 
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+            display: block;
         }
 
         .page-footer {
@@ -188,6 +206,7 @@
             .content-section { padding: 25px; }
             .marin-float { width: 140px; }
             .speech-bubble { left: -70%; top: -15%; width: 130px; }
+            .prompt { top: 55px; } /* Mobile tweak for prompts */
         }
     </style>
 </head>
@@ -236,10 +255,10 @@
             <div id="reason-display" style="color: var(--barbie-pink); font-weight: 600; margin: 15px 0; min-height: 24px;"></div>
 
             <div class="btn-group">
-                <div class="prompt" id="prompt-next" style="left: 15%; position: absolute; top: -45px; background: var(--barbie-pink); color: white; padding: 4px 10px; border-radius: 10px; font-size: 0.65rem; font-weight: bold; animation: bounce 1.5s infinite; white-space: nowrap;">Press me! ↓</div>
+                <div class="prompt" id="prompt-next" style="left: 15%;">Press me! ↑</div>
                 <button class="btn btn-next" onclick="nextReason()">Next Reason</button>
                 
-                <div class="prompt" id="prompt-love" style="right: 15%; display: none; position: absolute; top: -45px; background: var(--barbie-pink); color: white; padding: 4px 10px; border-radius: 10px; font-size: 0.65rem; font-weight: bold; animation: bounce 1.5s infinite; white-space: nowrap;">Press me! ↓</div>
+                <div class="prompt" id="prompt-love" style="right: 15%; display: none;">Press me! ↑</div>
                 <button class="btn btn-love" onclick="accepted()">I Love You</button>
             </div>
         </main>
@@ -255,9 +274,9 @@
                 I wanted to fill this space with things as beautiful as you. 🌺
             </div>
 
-            <div style="width: 100%; position: relative;">
+            <div style="width: 100%; display: flex; flex-direction: column;">
                 <img src="marin4.png" class="marin-full-img" alt="Marin Garden">
-                <div class="lace-trim" style="position: absolute; bottom: 0; left: 0;"></div>
+                <div class="lace-trim" style="margin-top: -5px; border-radius: 0 0 15px 15px;"></div>
             </div>
         </div>
 
