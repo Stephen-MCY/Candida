@@ -7,52 +7,60 @@
     <style>
         body {
             margin: 0; padding: 0; display: flex; justify-content: center;
-            align-items: center; height: 100vh; background: #ffeef2;
+            align-items: center; height: 100vh;
+            /* Barbie Pink Gradient Background */
+            background: linear-gradient(135deg, #FF99D6 0%, #FF66CC 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden; text-align: center;
         }
 
         .container {
-            background: white; padding: 2rem; border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem; border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 102, 204, 0.4); z-index: 10;
             max-width: 400px; position: relative;
+            border: 3px solid #ff66cc; /* Strong Barbie pink border */
         }
 
-        h1 { color: #ff4d6d; }
-        p { color: #555; line-height: 1.6; }
+        h1 { color: #ff007f; text-shadow: 1px 1px 2px #fff, -1px -1px 2px #ff66cc; } /* Sparkle effect */
+        p { color: #880044; line-height: 1.6; font-weight: bold; }
 
         .btn {
-            background: #ff4d6d; color: white; border: none;
-            padding: 10px 20px; border-radius: 50px; cursor: pointer;
-            font-size: 1rem; transition: transform 0.2s; margin: 10px;
+            background: #ff007f; color: white; border: none;
+            padding: 12px 24px; border-radius: 50px; cursor: pointer;
+            font-size: 1.1rem; transition: transform 0.2s, background 0.2s; margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 5px 0 #cc0066;
         }
 
-        .btn:hover { transform: scale(1.1); }
+        .btn:hover { transform: translateY(-3px); background: #ff3399;}
+        .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #cc0066; }
 
-        #no-btn { position: absolute; background: #aaa; z-index: 20; }
+        #runaway-btn { position: absolute; background: #ddd; z-index: 20; border: 1px solid #aaa; color: #555; }
 
         /* Marin Kitagawa Styling */
         .marin-container {
             position: fixed; bottom: 0; right: 10px;
-            width: 220px; z-index: 100; pointer-events: none;
+            width: 250px; z-index: 100; pointer-events: none;
         }
 
         .marin-img { 
             width: 100%; 
-            filter: drop-shadow(5px 5px 15px rgba(255, 77, 109, 0.3)); 
+            filter: drop-shadow(5px 5px 15px rgba(255, 102, 204, 0.5)); 
         }
 
         .speech-bubble {
-            position: absolute; top: -40px; left: -30px;
-            background: white; padding: 10px; border-radius: 15px;
-            border: 2px solid #ff4d6d; font-size: 0.85rem; font-weight: bold;
-            display: none; width: 140px; box-shadow: 5px 5px 0px #ff4d6d;
-            z-index: 101;
+            position: absolute; top: -50px; left: -20px;
+            background: white; padding: 12px; border-radius: 18px;
+            border: 3px solid #ff007f; font-size: 0.9rem; font-weight: bold;
+            display: none; width: 150px; box-shadow: 5px 5px 0px #ff66cc;
+            z-index: 101; color: #ff007f;
         }
 
+        /* Barbie Hearts Styling */
         .heart {
-            position: absolute; color: #ff4d6d; font-size: 20px;
-            user-select: none; animation: float 4s linear infinite;
+            position: absolute; font-size: 20px;
+            user-select: none; animation: float 5s linear infinite;
         }
 
         @keyframes float {
@@ -64,37 +72,40 @@
 <body>
 
     <div class="container" id="main-card">
-        <h1>Hi Beautiful! ❤️</h1>
-        <p id="message">I made this little space just to tell you how much you mean to me.</p>
-        <button class="btn" onclick="revealReason()">Click for a reason I love you</button>
-        <div id="extra-content" style="margin-top: 20px; font-weight: bold; color: #ff4d6d; min-height: 40px;"></div>
+        <h1>Hello Barbie Girl! 🎀</h1>
+        <p id="message">You look absolutely dynamic today! I made this magical space just for you.</p>
+        <button class="btn" onclick="revealReason()">Tell me something lovely</button>
+        <div id="extra-content" style="margin-top: 20px; font-weight: bold; color: #ff007f; min-height: 50px;"></div>
         
-        <p style="margin-top: 30px;">Do you love me too?</p>
-        <button class="btn" onclick="sayYes()">Yes!</button>
-        <button class="btn" id="no-btn" onmouseover="moveButton()">No</button>
+        <p style="margin-top: 30px;">Do you want a pink sparky rose? ✨</p>
+        <button class="btn" onclick="sayYes()">Yes, please!</button>
+        <button class="btn" id="runaway-btn" onmouseover="moveButton()">Ew, not a chance.</button>
     </div>
 
     <div class="marin-container">
-        <div id="bubble" class="speech-bubble">Gosh, that's so sweet! ✨</div>
-        <img src="https://i.postimg.co/0yM7pXm8/marin-render.png" class="marin-img" alt="Marin Kitagawa">
+        <div id="bubble" class="speech-bubble">Aww, my gosh! Dynamic! ✨</div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiQcSLM4frKOr1BSuxy_-ENGXLzVvrjH0Wsw&s" class="marin-img" alt="Marin Kitagawa">
     </div>
 
     <script>
         const reasons = [
-            "Your smile lights up my entire world.",
-            "You make me a better person every day.",
-            "I love the way you laugh at my silly jokes.",
-            "You are my safest place and my biggest adventure."
+            "Your energy is more dazzling than any diamond.",
+            "You make the world more colorful just by being in it.",
+            "I love how we can always create a new adventure together.",
+            "You are my absolute favorite fairytale."
         ];
         
         const marinQuotes = [
-            "Gosh, so sweet! ✨",
-            "Aww, look at that!",
-            "Waaa! So romantic!",
-            "You two are goals! ❤️"
+            "My gosh! Dazzling!",
+            "Look at that shine! ✨",
+            "Waaa! Totally dynamic!",
+            "Eeee! I'm melting! ❤️"
         ];
 
         let reasonIndex = 0;
+
+        // Custom pink heart options
+        const heartColors = ['#ff99d6', '#ff66cc', '#ff3399', '#ff007f'];
 
         function revealReason() {
             const display = document.getElementById('extra-content');
@@ -111,7 +122,7 @@
         }
 
         function moveButton() {
-            const btn = document.getElementById('no-btn');
+            const btn = document.getElementById('runaway-btn');
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight);
             btn.style.left = x + 'px';
@@ -119,20 +130,22 @@
         }
 
         function sayYes() {
-            document.getElementById('main-card').innerHTML = "<h1>I knew it! ❤️</h1><p>You're stuck with me forever now. Marin and I both think you're the best!</p>";
-            document.getElementById('bubble').innerText = "YAY! IT'S OFFICIAL!";
+            document.getElementById('main-card').innerHTML = "<h1>Dazzling! ✨</h1><p>You accepted the rose! Marin and I knew you were the perfect Barbie. You're my princess forever!</p>";
+            document.getElementById('bubble').innerText = "YAY! DYNAMIC CHOICE!";
             document.getElementById('bubble').style.display = 'block';
-            for(let i=0; i<30; i++) setTimeout(createHeart, i * 100);
+            for(let i=0; i<40; i++) setTimeout(createHeart, i * 100);
         }
 
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML = '❤️';
+            heart.innerHTML = '💖'; /* Pink Sparkle Heart */
+            heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 4000);
+            setTimeout(() => heart.remove(), 5000);
         }
     </script>
 </body>
